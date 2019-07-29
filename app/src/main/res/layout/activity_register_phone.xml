@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registration.RegisterPhone">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background"
+            android:alpha="0.7"
+            />
+
+        <View
+            android:id="@+id/overlay_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#6F000000"
+            />
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/firstname_la">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="49dp"
+                            android:id="@+id/firstname_txt"
+                            android:hint="First Name"
+                            android:textSize="20sp"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="30dp"
+                            android:background="@drawable/shape_textbox" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/firstname_la"
+                    android:id="@+id/lastName_la">
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="49dp"
+                            android:id="@+id/lastname_txt"
+                            android:hint="Last Name"
+                            android:textSize="20sp"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="30dp"
+                            android:background="@drawable/shape_textbox" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lastName_la"
+                    android:id="@+id/company_la">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="49dp"
+                        android:id="@+id/company_txt"
+                        android:hint="Company Name"
+                        android:textSize="20sp"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/shape_textbox" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/company_la"
+                    android:id="@+id/phone_la">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="49dp"
+                        android:id="@+id/phone_txt"
+                        android:hint="Email Address"
+                        android:textSize="20sp"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/shape_textbox" />
+                </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/phone_la"
+            android:id="@+id/password_la">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:id="@+id/password_txt"
+                android:hint="Password"
+                android:textSize="20sp"
+                android:gravity="center_vertical"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/shape_textbox" />
+        </RelativeLayout>
+
+
+
+
+
+
+        <Button
+            android:layout_width="149dp"
+            android:layout_height="55dp"
+            android:layout_below="@id/password_la"
+            android:layout_marginTop="30dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/next_btn"
+            android:textColor="#ffff"
+            android:text="Next"
+
+            android:background="@drawable/shape_button"
+
+            />
+
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>
