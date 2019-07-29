@@ -33,6 +33,8 @@ public class RegisterPhone extends AppCompatActivity {
     DatabaseReference dbref;
     DatabaseReference refprofile;
     DatabaseReference ratingdatabase;
+    String imageURL = "default_URL";
+
 
 
 
@@ -136,6 +138,8 @@ public class RegisterPhone extends AppCompatActivity {
                             hashMap.put("Email", email_txt);
                             hashMap.put("Adress", adrr);
                             hashMap.put("About_you", aboutu);
+                            hashMap.put("image_url", imageURL);
+
 
 
                             dbref.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {

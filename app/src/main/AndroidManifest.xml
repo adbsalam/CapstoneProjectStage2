@@ -23,10 +23,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
+        <activity android:name=".Search_query_UI.start_search_ui"></activity>
         <activity
             android:name=".User_UI.User_Home"
             android:label="@string/title_activity_user__home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".sign_in.Log_in" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
