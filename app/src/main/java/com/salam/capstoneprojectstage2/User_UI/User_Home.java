@@ -2,18 +2,20 @@ package com.salam.capstoneprojectstage2.User_UI;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.bumptech.glide.Glide;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-
-import android.view.MenuItem;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,18 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.salam.capstoneprojectstage2.MainActivity;
 import com.salam.capstoneprojectstage2.Models.user_details;
 import com.salam.capstoneprojectstage2.R;
-import com.salam.capstoneprojectstage2.Registration.RegisterPhone;
-import com.salam.capstoneprojectstage2.sign_in.Log_in;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import com.salam.capstoneprojectstage2.Search_query_UI.start_search_ui;
+import com.salam.capstoneprojectstage2.peopleNearby.nearby_permissions;
 
 public class User_Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,6 +37,7 @@ public class User_Home extends AppCompatActivity
     DatabaseReference reference;
     TextView fullname_nav, email_nav;
     ImageView profile_dp;
+    CardView searchcard, nearbycard;
 
 
     @Override
@@ -61,13 +54,34 @@ public class User_Home extends AppCompatActivity
         fullname_nav = headerView.findViewById(R.id.nav_full_name);
         email_nav = headerView.findViewById(R.id.nav_email);
         profile_dp = headerView.findViewById(R.id.imageView);
+        nearbycard = findViewById(R.id.nearby_card);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        searchcard = findViewById(R.id.search_card);
 
 
+        searchcard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent searchIntent = new Intent(User_Home.this, start_search_ui.class);
+                startActivity(searchIntent);
+
+
+            }
+        });
+
+        nearbycard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent searchIntent = new Intent(User_Home.this, nearby_permissions.class);
+                startActivity(searchIntent);
+            }
+        });
 
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

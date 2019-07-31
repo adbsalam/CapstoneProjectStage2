@@ -23,7 +23,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".Search_query_UI.start_search_ui"></activity>
+        <activity android:name=".peopleNearby.nearby_maps"></activity>
+        <activity android:name=".peopleNearby.nearby_permissions" />
+        <activity android:name=".peopleNearby.nearbyUsers" />
+        <activity
+            android:name=".Search_query_UI.search_results"
+            android:parentActivityName=".Search_query_UI.start_search_ui" />
+        <activity
+            android:name=".Search_query_UI.start_search_ui"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".User_UI.User_Home"
             android:label="@string/title_activity_user__home"

@@ -53,13 +53,23 @@ public class user_details implements Parcelable {
         this.About_you = About_you;
     }
 
-    public user_details(String First_name, String Last_name, String Adress, String Company_name, String imageURL, String About_you) {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public user_details(String First_name, String Last_name, String Adress, String Company_name, String imageURL, String About_you, String id) {
         this.First_name = First_name;
         this.Last_name = Last_name;
         this.Adress = Adress;
         this.Company_name = Company_name;
         this.imageURL = imageURL;
         this.About_you = About_you;
+        this.id  = id;
+
     }
 
     private String First_name;
@@ -68,6 +78,8 @@ public class user_details implements Parcelable {
     private String Company_name;
     private String imageURL;
     private String About_you;
+    private String id;
+
 
     public user_details() {
     }
@@ -79,6 +91,7 @@ public class user_details implements Parcelable {
         Company_name = in.readString();
         imageURL = in.readString();
         About_you = in.readString();
+        id = in.readString();
     }
 
     public static final Creator<user_details> CREATOR = new Creator<user_details>() {
@@ -106,5 +119,6 @@ public class user_details implements Parcelable {
         dest.writeString(Company_name);
         dest.writeString(imageURL);
         dest.writeString(About_you);
+        dest.writeString(id);
     }
 }

@@ -1,14 +1,14 @@
 package com.salam.capstoneprojectstage2.Registration;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -48,6 +48,7 @@ public class RegisterPhone extends AppCompatActivity {
         Longi = loc.getStringExtra("longi");
         adrr = loc.getStringExtra("adr");
 
+        getSupportActionBar().setTitle("Register");
 
         email = findViewById(R.id.phone_txt);
         first_name = findViewById(R.id.firstname_txt);
@@ -138,7 +139,7 @@ public class RegisterPhone extends AppCompatActivity {
                             hashMap.put("Email", email_txt);
                             hashMap.put("Adress", adrr);
                             hashMap.put("About_you", aboutu);
-                            hashMap.put("image_url", imageURL);
+                            hashMap.put("imageURL", imageURL);
 
 
 

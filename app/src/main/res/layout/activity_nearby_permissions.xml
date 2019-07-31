@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".peopleNearby.nearby_permissions"
+    android:background="@color/colorPrimary"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationtitle"
+        android:text="@string/location_permission"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:textColor="#ffff"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/permissiondis"
+        android:text="@string/dis_text"
+
+        android:layout_centerVertical="true"
+        android:textSize="18sp"
+        android:textColor="#ffff"
+        android:textStyle="bold"
+        android:layout_marginTop="50dp"
+        android:textAlignment="center"
+        />
+
+    <Button
+        android:id="@+id/alow_location_btn"
+        android:layout_width="227dp"
+        android:layout_height="54dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+
+        android:background="@drawable/shape_button"
+        android:layout_below="@+id/permissiondis"
+        android:text="Use Location"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        />
+
+</RelativeLayout>

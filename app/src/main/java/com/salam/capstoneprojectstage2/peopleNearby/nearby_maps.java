@@ -1,4 +1,4 @@
-package com.salam.capstoneprojectstage2.Registration;
+package com.salam.capstoneprojectstage2.peopleNearby;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,13 +36,16 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.salam.capstoneprojectstage2.R;
+import com.salam.capstoneprojectstage2.Registration.RegisterPhone;
+import com.salam.capstoneprojectstage2.Registration.RegistrationMaps;
 import com.skyfishjy.library.RippleBackground;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class RegistrationMaps extends AppCompatActivity implements OnMapReadyCallback {
+public class nearby_maps extends AppCompatActivity implements OnMapReadyCallback {
+
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     EditText cusadr;
@@ -67,7 +70,7 @@ public class RegistrationMaps extends AppCompatActivity implements OnMapReadyCal
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         mapView = mapFragment.getView();
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(RegistrationMaps.this);
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(nearby_maps.this);
         cusadr = findViewById(R.id.currentadress_service);
         rippleBackground = findViewById(R.id.ripple_poscus);
 
@@ -99,23 +102,23 @@ public class RegistrationMaps extends AppCompatActivity implements OnMapReadyCal
 
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
 
-        SettingsClient settingsClient = LocationServices.getSettingsClient(RegistrationMaps.this);
+        SettingsClient settingsClient = LocationServices.getSettingsClient(nearby_maps.this);
         Task<LocationSettingsResponse> task = settingsClient.checkLocationSettings(builder.build());
-        task.addOnSuccessListener(RegistrationMaps.this, new OnSuccessListener<LocationSettingsResponse>() {
+        task.addOnSuccessListener(nearby_maps.this, new OnSuccessListener<LocationSettingsResponse>() {
             @Override
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
                 getDeviceLocation();
             }
         });
 
-        task.addOnFailureListener(RegistrationMaps.this, new OnFailureListener() {
+        task.addOnFailureListener(nearby_maps.this, new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 if (e instanceof ResolvableApiException){
                     ResolvableApiException resolvbale = (ResolvableApiException) e;
 
                     try{
-                        resolvbale.startResolutionForResult(RegistrationMaps.this, 51);
+                        resolvbale.startResolutionForResult(nearby_maps.this, 51);
                     } catch (IntentSender.SendIntentException e1) {
                         e1.printStackTrace();
                     }
@@ -175,7 +178,7 @@ public class RegistrationMaps extends AppCompatActivity implements OnMapReadyCal
                     }
                 }else {
 
-                    Toast.makeText(RegistrationMaps.this, "Unable to get last location", Toast.LENGTH_LONG).show();
+                    Toast.makeText(nearby_maps.this, "Unable to get last location", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -183,7 +186,7 @@ public class RegistrationMaps extends AppCompatActivity implements OnMapReadyCal
 
     private String getCityName(LatLng cordinates) {
         String mycity = "";
-        Geocoder geocoder = new Geocoder(RegistrationMaps.this, Locale.getDefault());
+        Geocoder geocoder = new Geocoder(nearby_maps.this, Locale.getDefault());
 
         try{
             List<Address> addresses = geocoder.getFromLocation(cordinates.latitude, cordinates.longitude, 1);
@@ -208,15 +211,14 @@ public class RegistrationMaps extends AppCompatActivity implements OnMapReadyCal
     public void findaddress(View view) {
 
         String adrtxt = cusadr.getText().toString();
-        Intent startregisterloc = new Intent(RegistrationMaps.this, RegisterPhone.class);
+        Intent startregisterloc = new Intent(nearby_maps.this, nearbyUsers.class);
         startregisterloc.putExtra("lati", latitudeput);
         startregisterloc.putExtra("longi", longiput);
         startregisterloc.putExtra("adr", adrtxt);
         startActivity(startregisterloc);
+        finish();
 
 
     }
-
-
 
 }
