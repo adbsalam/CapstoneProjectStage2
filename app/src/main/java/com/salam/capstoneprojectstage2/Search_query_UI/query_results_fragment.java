@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +37,8 @@ public class query_results_fragment extends Fragment {
     private RecyclerView recyclerView;
     private List<search_results_model> case_list = new ArrayList<>();
     private search_results_adapter mAdapter;
-    String  day_min, month_min, year_min;
-    String  day_max, month_max, year_max;
+   String date_min, date_max;
+
     String Keyword_search;
     private ProgressBar progressBar;
     private int pStatus = 0;
@@ -65,13 +66,10 @@ public class query_results_fragment extends Fragment {
 
         Bundle bundle=getArguments();
         assert bundle != null;
-        day_min = bundle.getString("minday");
-        month_min = bundle.getString("minmonth");
-        year_min = bundle.getString("minyear");
-        day_max = bundle.getString("maxday");
-        month_max = bundle.getString("maxmonth");
-        year_max = bundle.getString("maxyear");
+        date_min = bundle.getString("date_min");
+        date_max = bundle.getString("date_max");
         Keyword_search = bundle.getString("key_word");
+
         progressBar = view.findViewById(R.id.progress);
 
 
@@ -102,8 +100,13 @@ public class query_results_fragment extends Fragment {
                 .appendPath(getString(R.string.link)).appendPath(getString(R.string.jsonname));
 
                 */
+String newtext = Keyword_search;
 
-        String URL = "https://api.case.law/v1/cases/?search="+Keyword_search;
+
+        String URL = "https://api.case.law/v1/cases/?search="+Keyword_search+"&decision_date_min="+date_min+"&decision_date_max="+date_max;
+        Log.d("date",  URL);
+
+
 
         RequestQueue Video_Queue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new com.android.volley.Response.Listener<String>() {

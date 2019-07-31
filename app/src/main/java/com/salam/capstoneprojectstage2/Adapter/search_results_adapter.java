@@ -1,6 +1,7 @@
 package com.salam.capstoneprojectstage2.Adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.salam.capstoneprojectstage2.Models.search_results_model;
 import com.salam.capstoneprojectstage2.R;
 import com.salam.capstoneprojectstage2.Search_query_UI.caseLaw_details_fragment;
+import com.salam.capstoneprojectstage2.widget.app_details_widget;
 
 import java.util.List;
 
@@ -43,6 +45,10 @@ public class search_results_adapter extends RecyclerView.Adapter<search_results_
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(activity, app_details_widget.class);
+                i.setAction(app_details_widget.UPDATE_ACTION);
+                i.putExtra("id",caseList_result.getCaseid());
+                activity.sendBroadcast(i);
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 Fragment myFragment = new caseLaw_details_fragment();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, myFragment).addToBackStack(null).commit();
@@ -50,6 +56,7 @@ public class search_results_adapter extends RecyclerView.Adapter<search_results_
                 args.putString("id", caseList_result.getCaseid());
                 args.putString("j", caseList_result.getJurisdiction());
                 myFragment.setArguments(args);
+
 
             }
         });

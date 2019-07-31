@@ -12,8 +12,8 @@ import com.salam.capstoneprojectstage2.R;
 public class search_results extends AppCompatActivity {
 
 
-    String  day_min, month_min, year_min;
-    String  day_max, month_max, year_max;
+ String date_min, date_max;
+
     String Keyword_search;
 
     @Override
@@ -22,13 +22,8 @@ public class search_results extends AppCompatActivity {
         setContentView(R.layout.activity_search_results);
         getSupportActionBar().setTitle("Results");
         Intent query_parameters = getIntent();
-        day_min = query_parameters.getStringExtra("minday");
-        month_min = query_parameters.getStringExtra("minmonth");
-        year_min = query_parameters.getStringExtra("minyear");
-
-        day_max = query_parameters.getStringExtra("maxday");
-        month_max = query_parameters.getStringExtra("maxmonth");
-        year_max = query_parameters.getStringExtra("maxyear");
+       date_min = query_parameters.getStringExtra("date_min");
+       date_max = query_parameters.getStringExtra("date_max");
         Keyword_search = query_parameters.getStringExtra("key_word");
 
 
@@ -46,13 +41,8 @@ public class search_results extends AppCompatActivity {
         ft.replace(R.id.container, fragment, tag);
         ft.commitAllowingStateLoss();
         Bundle bundle = new Bundle();
-        bundle.putString("minday", day_min);
-        bundle.putString("minmonth", month_min);
-        bundle.putString("minyear", year_min);
-
-        bundle.putString("maxday", day_max);
-        bundle.putString("maxmonth", month_max);
-        bundle.putString("maxyear", year_max);
+        bundle.putString("date_min", date_min);
+        bundle.putString("date_max", date_max);
         bundle.putString("key_word", Keyword_search);
 
         fragment.setArguments(bundle);

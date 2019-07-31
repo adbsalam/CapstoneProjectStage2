@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.salam.capstoneprojectstage2">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -23,7 +24,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".peopleNearby.nearby_maps"></activity>
+        <receiver android:name=".widget.app_details_widget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_details_widget_info" />
+        </receiver>
+
+        <activity android:name=".Bookmarks.bookmarks_act" />
+        <activity android:name=".peopleNearby.nearby_maps" />
         <activity android:name=".peopleNearby.nearby_permissions" />
         <activity android:name=".peopleNearby.nearbyUsers" />
         <activity

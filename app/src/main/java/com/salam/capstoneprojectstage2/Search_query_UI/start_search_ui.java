@@ -2,6 +2,7 @@ package com.salam.capstoneprojectstage2.Search_query_UI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,6 +20,8 @@ public class start_search_ui extends AppCompatActivity {
     String  day_max, month_max, year_max;
     EditText keyword;
     String Keyword_search;
+    String date_min, date_max;
+
 
 
 
@@ -47,20 +50,36 @@ public class start_search_ui extends AppCompatActivity {
                year_max = String.valueOf(datePicker_max.getYear());
 
 
+               if (Integer.valueOf(month_min) < 10){
+                    date_min = year_min+"-"+"0"+month_min+"-"+day_min;
+               }else
+               {
+                 date_min =  year_min+"-"+month_min+"-"+day_min;
+               }
+
+               if (Integer.valueOf(month_max) < 10){
+                   date_max = year_max+"-"+"0"+month_max+"-"+day_max;
+               }
+               else {
+                   date_max = year_max+"-"+month_max+"-"+day_max;
+
+               }
+
                Keyword_search = keyword.getText().toString();
 
 
+
+
+
+
+
                Intent search_start = new Intent(start_search_ui.this, search_results.class);
-               search_start.putExtra("minday", day_min);
-               search_start.putExtra("minmonth", month_min);
-               search_start.putExtra("minyear", year_min);
+                search_start.putExtra("date_max", date_max);
+               search_start.putExtra("date_min", date_min);
 
-               search_start.putExtra("maxday", day_max);
-               search_start.putExtra("maxmonth", month_max);
-               search_start.putExtra("maxyear", year_max);
-               search_start.putExtra("key_word", Keyword_search);
-
-
+               Log.d("fuck", date_max);
+               Log.d("fuck", date_min);
+               Log.d("fuck", month_max);
                startActivity(search_start);
            }
        });

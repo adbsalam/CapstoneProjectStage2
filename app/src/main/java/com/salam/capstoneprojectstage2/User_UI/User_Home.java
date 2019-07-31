@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.salam.capstoneprojectstage2.Bookmarks.bookmarks_act;
 import com.salam.capstoneprojectstage2.MainActivity;
 import com.salam.capstoneprojectstage2.Models.user_details;
 import com.salam.capstoneprojectstage2.R;
@@ -37,7 +38,7 @@ public class User_Home extends AppCompatActivity
     DatabaseReference reference;
     TextView fullname_nav, email_nav;
     ImageView profile_dp;
-    CardView searchcard, nearbycard;
+    CardView searchcard, nearbycard, favcard;
 
 
     @Override
@@ -55,6 +56,8 @@ public class User_Home extends AppCompatActivity
         email_nav = headerView.findViewById(R.id.nav_email);
         profile_dp = headerView.findViewById(R.id.imageView);
         nearbycard = findViewById(R.id.nearby_card);
+        favcard = findViewById(R.id.Bookmarks_card);
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -105,6 +108,17 @@ public class User_Home extends AppCompatActivity
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+
+
+        favcard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newintnet = new Intent (User_Home.this, bookmarks_act.class);
+                startActivity(newintnet);
+
+            }
+        });
+
 
 
 
