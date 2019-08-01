@@ -1,9 +1,5 @@
 package com.salam.capstoneprojectstage2.Registration;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +10,10 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -31,8 +31,9 @@ public class Location_Permission extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location__permission);
+        setContentView(R.layout.activity_nearby_permissions);
         btngrnt = findViewById(R.id.alow_location_btn);
-        getSupportActionBar().setTitle("Permission");
+        getSupportActionBar().setTitle(getString(R.string.PERMISSION));
 
 
         if (ContextCompat.checkSelfPermission(Location_Permission.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
@@ -50,7 +51,7 @@ public class Location_Permission extends AppCompatActivity {
                             @Override
                             public void onPermissionGranted(PermissionGrantedResponse response) {
                                 Intent request = getIntent();
-                                requestS = request.getStringExtra("request");
+                                requestS = request.getStringExtra(getString(R.string.REQUEST));
 
 
 
@@ -63,21 +64,21 @@ public class Location_Permission extends AppCompatActivity {
                                 if (response.isPermanentlyDenied()){
 
                                     AlertDialog.Builder builder = new AlertDialog.Builder(Location_Permission.this);
-                                    builder.setTitle("Permission Denied")
-                                            .setMessage("Permission is denied, Please go to settings>>app>>permissions, and allow app to use location.")
-                                            .setNegativeButton("Cancel", null)
-                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    builder.setTitle(getString(R.string.DENIED))
+                                            .setMessage(getString(R.string.SETTING_LOC_HELP))
+                                            .setNegativeButton(getString(R.string.CANCEL), null)
+                                            .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     Intent intent = new Intent();
                                                     intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                                    intent.setData(Uri.fromParts("package", getPackageName(), null));
+                                                    intent.setData(Uri.fromParts(getString(R.string.PACKAGE), getPackageName(), null));
 
                                                 }
                                             })
                                             .show();
                                 } else {
-                                    Toast.makeText(Location_Permission.this, "Permission Denied", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Location_Permission.this, getString(R.string.PERMISSION_DENIED_ERR), Toast.LENGTH_LONG).show();
                                 }
                             }
 
@@ -91,8 +92,6 @@ public class Location_Permission extends AppCompatActivity {
         });
 
     }
-
-
 
 
 

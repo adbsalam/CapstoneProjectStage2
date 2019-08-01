@@ -2,7 +2,6 @@ package com.salam.capstoneprojectstage2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,22 +26,15 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     DatabaseReference dbref;
 
-
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
 
-
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        dbref = FirebaseDatabase.getInstance().getReference("Users");
+        dbref = FirebaseDatabase.getInstance().getReference(getString(R.string.USER_M_ACT));
 
-
+        //AUTO LOGIN CHECKS IF USER ALREADY LOGGED IN AND EXISTS IN FIREBASE DATABASE
         if (firebaseUser !=null){
-
-
             dbref.orderByChild("id").equalTo(firebaseUser.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -52,16 +44,13 @@ public class MainActivity extends AppCompatActivity {
                         Intent loginbusiness = new Intent(MainActivity.this, Log_in.class);
                         startActivity(loginbusiness);
                         finish();
-
                     }
                     else {
                         Intent loginauto = new Intent(MainActivity.this, User_Home.class);
                         startActivity(loginauto);
                         finish();
                     }
-
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     Intent loginauto = new Intent(MainActivity.this, User_Home.class);
@@ -79,36 +68,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-
+        //NEXT ACTIVITY ON CLICK
         Register = findViewById(R.id.btn_register);
         Sign_in = findViewById(R.id.btn_signin);
-
-
-
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent register = new Intent(MainActivity.this, Location_Permission.class);
                 startActivity(register);
-
             }
         });
-
-
         Sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent Signin = new Intent(MainActivity.this, Log_in.class);
                 startActivity(Signin);
-
-
             }
         });
-
-
-
-
-
     }
 }

@@ -1,9 +1,5 @@
 package com.salam.capstoneprojectstage2.Registration;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -12,10 +8,13 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -48,13 +47,10 @@ public class RegistrationMaps extends AppCompatActivity implements OnMapReadyCal
     EditText cusadr;
     String latitudeput = "";
     String longiput = "";
-    public static final String EXTRA_LAT= "";
-    public static final String EXTRA_LON = "";
     RippleBackground rippleBackground;
     private Location mLastknownlocation;
     private LocationCallback locationCallback;
     private View mapView;
-    private Button btnFind;
     private final float DEFAULT_ZOOM = 18;
     String adress;
 
@@ -62,7 +58,7 @@ public class RegistrationMaps extends AppCompatActivity implements OnMapReadyCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_maps);
-        getSupportActionBar().setTitle("Location");
+        getSupportActionBar().setTitle(getString(R.string.LOCATION_M));
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -70,11 +66,7 @@ public class RegistrationMaps extends AppCompatActivity implements OnMapReadyCal
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(RegistrationMaps.this);
         cusadr = findViewById(R.id.currentadress_service);
         rippleBackground = findViewById(R.id.ripple_poscus);
-
-
     }
-
-
     @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -175,7 +167,7 @@ public class RegistrationMaps extends AppCompatActivity implements OnMapReadyCal
                     }
                 }else {
 
-                    Toast.makeText(RegistrationMaps.this, "Unable to get last location", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegistrationMaps.this, getString(R.string.UNABLE_ERROR), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -203,15 +195,13 @@ public class RegistrationMaps extends AppCompatActivity implements OnMapReadyCal
         return mycity;
 
     }
-
-
     public void findaddress(View view) {
 
         String adrtxt = cusadr.getText().toString();
         Intent startregisterloc = new Intent(RegistrationMaps.this, RegisterPhone.class);
-        startregisterloc.putExtra("lati", latitudeput);
-        startregisterloc.putExtra("longi", longiput);
-        startregisterloc.putExtra("adr", adrtxt);
+        startregisterloc.putExtra(getString(R.string.LATI_M), latitudeput);
+        startregisterloc.putExtra(getString(R.string.LONGI_M), longiput);
+        startregisterloc.putExtra(getString(R.string.ADR_MM), adrtxt);
         startActivity(startregisterloc);
 
 

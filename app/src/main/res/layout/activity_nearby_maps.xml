@@ -20,7 +20,7 @@
         android:layout_marginTop="35dp"
         android:background="@color/colorPrimaryDark"
         android:textColor="#ffff"
-        android:text="Current Location"
+        android:text="@string/current_location_layout"
         android:padding="10dp"
         android:textSize="17sp"
         android:textAlignment="center"/>
@@ -36,14 +36,12 @@
         app:rb_duration="4000"
         app:rb_scale="5">
 
-
-
-
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/placeholder"
             android:layout_centerHorizontal="true"
+            android:contentDescription="@string/placeholder"
             android:layout_centerVertical="true"
 
 
@@ -57,11 +55,10 @@
         android:layout_width="227dp"
         android:layout_centerHorizontal="true"
         android:layout_height="50dp"
-
         android:onClick="findaddress"
         android:background="@drawable/shape_button"
         android:layout_marginBottom="25dp"
-        android:text="Next"
+        android:text="@string/next_btn"
         android:textColor="#FFFFFF"
         android:layout_alignParentBottom="true"
         android:textStyle="bold"

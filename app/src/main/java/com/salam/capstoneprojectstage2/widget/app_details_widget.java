@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -23,23 +24,18 @@ import org.json.JSONObject;
 
 public class app_details_widget extends AppWidgetProvider {
     public static String UPDATE_ACTION = "ActionUpdateSinglenoteWidget";
-    static String recipiedetails = "";
-
+    static String CASE_DETAILS = "";
     static String idofitem;
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId, String caseLaw, String title) {
-
-        CharSequence widgetText = "Case Law";
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.app_details_widget);
         views.setTextViewText(R.id.appwidget_text, title);
         views.setTextViewText(R.id.case_details_widget, caseLaw);
-
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
-
 
     @Override
     public void onEnabled(Context context) {
@@ -53,43 +49,44 @@ public class app_details_widget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        //GET CASE ID FOR QUERY
         super.onReceive(context, intent);
         String action = intent.getAction();
         Bundle extras = intent.getExtras();
         idofitem = extras.getString("id");
-
-
-
         if (action != null && action.equals(UPDATE_ACTION)) {
             // updateAppWidget(context, appWidgetManager, id , titleofrecipie);
             ShowItemsNames(context, idofitem);
         } else { super.onReceive(context, intent); }
     }
-
+    //CASE DETAILS QUERY
     private void ShowItemsNames(final Context context, final String idtocheck) {
 
-        String URL = "https://api.case.law/v1/cases/" + idtocheck;
+
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme(context.getString(R.string.HTTP))
+                .authority(context.getString(R.string.AUTHORITY))
+                .appendPath("v1")
+                .appendPath(context.getString(R.string.CASES_D))
+                .appendPath(idtocheck);
+        String URL2 = builder.build().toString();
 
 
         RequestQueue Video_Queue = Volley.newRequestQueue((context));
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new com.android.volley.Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL2, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-
-
                     JSONArray casebodyOBJ = jsonObject.getJSONArray("citations");
                     JSONObject volumeOBJ = jsonObject.getJSONObject("volume");
                     JSONObject courtOBJ = jsonObject.getJSONObject("court");
                     JSONObject juriOBJ = jsonObject.getJSONObject("jurisdiction");
-
-
-                    recipiedetails = casebodyOBJ.getJSONObject(0).getString("type") + "  " + casebodyOBJ.getJSONObject(0).getString("cite") + "\n"+
+                    //STRING TO SET TEXTVIEW OF WIDGET THAT GETS DETAULS OF THE CASE
+                    CASE_DETAILS = casebodyOBJ.getJSONObject(0).getString("type") + "  " + casebodyOBJ.getJSONObject(0).getString("cite") + "\n"+
                             jsonObject.getString("name_abbreviation") + "\nDecision Date:" + jsonObject.getString("decision_date")+"\n" +
                             courtOBJ.getString("name") + "(abr)" + courtOBJ.getString("name_abbreviation")+"\n" +
                             juriOBJ.getString("name") + " " + juriOBJ.getString("name_long");
-
                     final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
                     ComponentName name = new ComponentName(context, app_details_widget.class);
                     int[] appWidgetId = AppWidgetManager.getInstance(context).getAppWidgetIds(name);
@@ -101,7 +98,7 @@ public class app_details_widget extends AppWidgetProvider {
                     else {
                         int id = appWidgetId[N-1];
 
-                        updateAppWidget(context, appWidgetManager, id , recipiedetails, jsonObject.getString("name"));
+                        updateAppWidget(context, appWidgetManager, id , CASE_DETAILS, jsonObject.getString("name_abbreviation"));
                     }
 
 
@@ -118,9 +115,14 @@ public class app_details_widget extends AppWidgetProvider {
 
         Video_Queue.add(stringRequest);
 
-
-
     }
+
+
+
+
+
+
+
 
 }
 

@@ -1,5 +1,6 @@
 package com.salam.capstoneprojectstage2.Bookmarks;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -16,32 +16,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.salam.capstoneprojectstage2.Adapter.search_results_adapter;
 import com.salam.capstoneprojectstage2.Models.fav_model_details;
 import com.salam.capstoneprojectstage2.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class book_detail_frag extends Fragment {
-    private RecyclerView recyclerView;
-    private List<fav_model_details> case_list = new ArrayList<>();
-    private search_results_adapter mAdapter;
 
     DatabaseReference reference;
     FirebaseAuth auth;
     String caseid;
-
     private TextView title, docket;
     private TextView citation_txt, juri_txt, court_txt, details_txt;
-
     public book_detail_frag() {
         // Required empty public constructor
     }
-
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +36,7 @@ public class book_detail_frag extends Fragment {
 
             Bundle bundle=getArguments();
             assert bundle != null;
-            caseid = bundle.getString("id");
-
+            caseid = bundle.getString(getString(R.string.ID_N));
         }
     }
 
@@ -65,9 +51,8 @@ public class book_detail_frag extends Fragment {
         juri_txt = view.findViewById(R.id.juri_txt);
         court_txt = view.findViewById(R.id.court_txt);
         details_txt = view.findViewById(R.id.details_extra_txt);
-
         auth = FirebaseAuth.getInstance();
-        readCases();
+        new Newcase().execute("");
 
         return view;
 
@@ -75,10 +60,8 @@ public class book_detail_frag extends Fragment {
 
 
     private void readCases(){
-
-        reference = FirebaseDatabase.getInstance().getReference("Fav_cases").child(auth.getCurrentUser().getUid());
-
-        reference.orderByChild("caseid").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference = FirebaseDatabase.getInstance().getReference(getString(R.string.FAV_CASE)).child(auth.getCurrentUser().getUid());
+        reference.orderByChild(getString(R.string.CASE_ID)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
@@ -89,24 +72,12 @@ public class book_detail_frag extends Fragment {
 
                         title.setText(casemode.getTitle());
                         //citation = casebodyOBJ.toString().replaceAll("[*]","");
-
-
                         citation_txt.setText(casemode.getCite());
                         details_txt.setText(casemode.getDetails_extra());
                         court_txt.setText(casemode.getCourt());
                         juri_txt.setText(casemode.getJurisdiction() );
-
-
-
-
                     }
-
-
-
-
                 }
-
-
             }
 
             @Override
@@ -116,6 +87,25 @@ public class book_detail_frag extends Fragment {
         });
     }
 
+    private class Newcase extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            readCases();
+            return getString(R.string.DONE);
+        }
 
+        @Override
+        protected void onPostExecute(String result) {
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
 
 }

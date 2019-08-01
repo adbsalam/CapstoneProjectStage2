@@ -19,7 +19,6 @@ import com.salam.capstoneprojectstage2.R;
 import java.util.List;
 
 public class fav_adapter extends RecyclerView.Adapter<fav_adapter.RecyclerViewHolder> {
-
     private List<search_results_model> CaseList;
     private final Activity activity;
 
@@ -27,13 +26,11 @@ public class fav_adapter extends RecyclerView.Adapter<fav_adapter.RecyclerViewHo
         this.CaseList = CaseList;
         this.activity = activity;
     }
-
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new RecyclerViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.results_item, parent, false));
     }
-
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder, int position) {
         final search_results_model caseList_result = CaseList.get(position);

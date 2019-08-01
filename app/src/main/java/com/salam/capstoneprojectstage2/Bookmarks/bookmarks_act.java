@@ -14,16 +14,8 @@ public class bookmarks_act extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmarks_act);
-
-
-
-        addFragment(new booking_list_fragment(), false, "one");
-
-
-
+        addFragment(new booking_list_fragment(), false, getString(R.string.ONE));
     }
-
-
     public void addFragment(booking_list_fragment fragment, boolean addToBackStack, String tag) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
@@ -33,8 +25,4 @@ public class bookmarks_act extends AppCompatActivity {
         ft.replace(R.id.booking_container, fragment, tag);
         ft.commitAllowingStateLoss();
     }
-
-
-
-
 }

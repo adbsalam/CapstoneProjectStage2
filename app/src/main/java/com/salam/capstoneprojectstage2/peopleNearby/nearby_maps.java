@@ -1,9 +1,5 @@
 package com.salam.capstoneprojectstage2.peopleNearby;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -16,6 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -36,8 +36,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.salam.capstoneprojectstage2.R;
-import com.salam.capstoneprojectstage2.Registration.RegisterPhone;
-import com.salam.capstoneprojectstage2.Registration.RegistrationMaps;
 import com.skyfishjy.library.RippleBackground;
 
 import java.io.IOException;
@@ -65,7 +63,7 @@ public class nearby_maps extends AppCompatActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_maps);
-        getSupportActionBar().setTitle("Location");
+        getSupportActionBar().setTitle(getString(R.string.LOCATION));
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -178,7 +176,7 @@ public class nearby_maps extends AppCompatActivity implements OnMapReadyCallback
                     }
                 }else {
 
-                    Toast.makeText(nearby_maps.this, "Unable to get last location", Toast.LENGTH_LONG).show();
+                    Toast.makeText(nearby_maps.this, getString(R.string.UNABLE_ERROR), Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -9,28 +9,28 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search_black_24dp"
             android:title="Search" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:id="@+id/nav_nearby"
+            android:icon="@drawable/ic_people_black_24dp"
             android:title="Nearby" />
         <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
+            android:id="@+id/nav_bookmarks"
+            android:icon="@drawable/ic_collections_bookmark_black_24dp"
             android:title="Bookmarks" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:id="@+id/nav_edit_profile"
+                android:icon="@drawable/ic_edit_black_24dp"
                 android:title="Edit Profile" />
             <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_perm_device_information_black_24dp"
                 android:title="Log Out" />
         </menu>
     </item>

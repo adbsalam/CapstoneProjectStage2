@@ -20,16 +20,13 @@ public class search_results extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
-        getSupportActionBar().setTitle("Results");
+        getSupportActionBar().setTitle(getString(R.string.RESULTS));
+        //INTENTS TO FRAGMENT FOR SEARCH QUERY
         Intent query_parameters = getIntent();
-       date_min = query_parameters.getStringExtra("date_min");
-       date_max = query_parameters.getStringExtra("date_max");
-        Keyword_search = query_parameters.getStringExtra("key_word");
-
-
+       date_min = query_parameters.getStringExtra(getString(R.string.DATE_MIN_S));
+       date_max = query_parameters.getStringExtra(getString(R.string.DATE_MAX_S));
+        Keyword_search = query_parameters.getStringExtra(getString(R.string.KEY_WORD_SS));
         addFragment(new query_results_fragment(), false, "one");
-
-
     }
 
     public void addFragment(query_results_fragment fragment, boolean addToBackStack, String tag) {
@@ -41,9 +38,9 @@ public class search_results extends AppCompatActivity {
         ft.replace(R.id.container, fragment, tag);
         ft.commitAllowingStateLoss();
         Bundle bundle = new Bundle();
-        bundle.putString("date_min", date_min);
-        bundle.putString("date_max", date_max);
-        bundle.putString("key_word", Keyword_search);
+        bundle.putString(getString(R.string.DATE_MIN_S), date_min);
+        bundle.putString(getString(R.string.DATE_MAX_S), date_max);
+        bundle.putString(getString(R.string.KEY_WORD_SS), Keyword_search);
 
         fragment.setArguments(bundle);
     }

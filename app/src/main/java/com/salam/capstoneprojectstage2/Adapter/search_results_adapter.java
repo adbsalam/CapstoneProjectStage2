@@ -21,9 +21,9 @@ import java.util.List;
 
 
 public class search_results_adapter extends RecyclerView.Adapter<search_results_adapter.RecyclerViewHolder> {
-
         private List<search_results_model> CaseList;
         private final Activity activity;
+    boolean isPhone;
 
         public search_results_adapter(Activity activity, List<search_results_model> CaseList) {
             this.CaseList = CaseList;
@@ -45,17 +45,39 @@ public class search_results_adapter extends RecyclerView.Adapter<search_results_
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(activity, app_details_widget.class);
-                i.setAction(app_details_widget.UPDATE_ACTION);
-                i.putExtra("id",caseList_result.getCaseid());
-                activity.sendBroadcast(i);
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                Fragment myFragment = new caseLaw_details_fragment();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, myFragment).addToBackStack(null).commit();
-                Bundle args = new Bundle();
-                args.putString("id", caseList_result.getCaseid());
-                args.putString("j", caseList_result.getJurisdiction());
-                myFragment.setArguments(args);
+                isPhone = activity.getResources().getBoolean(R.bool.is_phone);
+                if (!isPhone) { //it's a tablet
+                    Intent i = new Intent(activity, app_details_widget.class);
+                    i.setAction(app_details_widget.UPDATE_ACTION);
+                    i.putExtra("id",caseList_result.getCaseid());
+                    activity.sendBroadcast(i);
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    Fragment myFragment = new caseLaw_details_fragment();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.container2, myFragment).addToBackStack(null).commit();
+                    Bundle args = new Bundle();
+                    args.putString("id", caseList_result.getCaseid());
+                    args.putString("j", caseList_result.getJurisdiction());
+                    myFragment.setArguments(args);
+
+                } else { //it's a phone, not a tablet
+                    Intent i = new Intent(activity, app_details_widget.class);
+                    i.setAction(app_details_widget.UPDATE_ACTION);
+                    i.putExtra("id",caseList_result.getCaseid());
+                    activity.sendBroadcast(i);
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    Fragment myFragment = new caseLaw_details_fragment();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, myFragment).addToBackStack(null).commit();
+                    Bundle args = new Bundle();
+                    args.putString("id", caseList_result.getCaseid());
+                    args.putString("j", caseList_result.getJurisdiction());
+                    myFragment.setArguments(args);
+
+                }
+
+
+
+
+
 
 
             }

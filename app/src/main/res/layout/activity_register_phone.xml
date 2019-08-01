@@ -15,6 +15,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/background"
             android:alpha="0.7"
+            android:contentDescription="@string/background_layout"
             />
 
         <View
@@ -41,7 +42,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="49dp"
                             android:id="@+id/firstname_txt"
-                            android:hint="First Name"
+                            android:hint="@string/first_name_la_l"
                             android:textSize="20sp"
                             android:gravity="center_vertical"
                             android:layout_marginTop="30dp"
@@ -58,7 +59,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="49dp"
                             android:id="@+id/lastname_txt"
-                            android:hint="Last Name"
+                            android:hint="@string/l_l"
                             android:textSize="20sp"
                             android:gravity="center_vertical"
                             android:layout_marginTop="30dp"
@@ -74,7 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="49dp"
                         android:id="@+id/company_txt"
-                        android:hint="Company Name"
+                        android:hint="@string/hint_com"
                         android:textSize="20sp"
                         android:gravity="center_vertical"
                         android:layout_marginTop="30dp"
@@ -89,7 +90,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="49dp"
                         android:id="@+id/phone_txt"
-                        android:hint="Email Address"
+                        android:hint="@string/email_address_hint"
                         android:textSize="20sp"
                         android:gravity="center_vertical"
                         android:layout_marginTop="30dp"
@@ -104,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:id="@+id/password_txt"
-                android:hint="Password"
+                android:hint="@string/password_hint"
                 android:textSize="20sp"
                 android:gravity="center_vertical"
                 android:layout_marginTop="30dp"
@@ -112,31 +113,19 @@
         </RelativeLayout>
 
 
-
-
-
-
         <Button
             android:layout_width="149dp"
             android:layout_height="55dp"
             android:layout_below="@id/password_la"
             android:layout_marginTop="30dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:id="@+id/next_btn"
             android:textColor="#ffff"
-            android:text="Next"
+            android:text="@string/hitn_next"
 
             android:background="@drawable/shape_button"
 
             />
-
-
-
-
-
-
-
-
 
 
     </RelativeLayout>

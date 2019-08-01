@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/case_details_widget"
         android:layout_marginTop="10dp"
-        android:text="hello"
+        android:text="@string/hello_lay"
         android:layout_below="@id/appwidget_text"
         android:layout_centerHorizontal="true"/>
 

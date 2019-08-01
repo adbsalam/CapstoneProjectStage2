@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,24 +30,25 @@ import com.salam.capstoneprojectstage2.Models.user_details;
 import com.salam.capstoneprojectstage2.R;
 import com.salam.capstoneprojectstage2.Search_query_UI.start_search_ui;
 import com.salam.capstoneprojectstage2.peopleNearby.nearby_permissions;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class User_Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     FirebaseUser firebaseUser;
     DatabaseReference reference;
     TextView fullname_nav, email_nav;
-    ImageView profile_dp;
+    CircleImageView profile_dp;
     CardView searchcard, nearbycard, favcard;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__home);
         Toolbar toolbar = findViewById(R.id.toolbar);
-
+        //SET NAVIGATION DRAWER AND TOOLBARS
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setTitle(getString(R.string.HOME_L));
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
@@ -57,27 +57,24 @@ public class User_Home extends AppCompatActivity
         profile_dp = headerView.findViewById(R.id.imageView);
         nearbycard = findViewById(R.id.nearby_card);
         favcard = findViewById(R.id.Bookmarks_card);
-
+        searchcard = findViewById(R.id.search_card);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        searchcard = findViewById(R.id.search_card);
 
-
+        //SEARCH CARD ONCLICK LISTNER
         searchcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent searchIntent = new Intent(User_Home.this, start_search_ui.class);
                 startActivity(searchIntent);
-
-
             }
         });
 
+        //NEARBY CARD ONCLICK LISTNER
         nearbycard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,20 +85,21 @@ public class User_Home extends AppCompatActivity
 
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference(getString(R.string.USER_DB_U)).child(firebaseUser.getUid());
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 user_details user = dataSnapshot.getValue(user_details.class);
                 fullname_nav.setText(user.getFirst_name() );
+                email_nav.setText(firebaseUser.getEmail().toString());
 
-                if (user.getimageURL().equals("default_URL")){
+                if (user.getimageURL().equals(getString(R.string.DEFAULT_URL_U))){
                     profile_dp.setImageResource(android.R.drawable.ic_menu_compass);
                 }
                 else
                 {
-                    //Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
+                    Picasso.get().load(user.getimageURL()).into(profile_dp);
                 }
             }
             @Override
@@ -109,7 +107,7 @@ public class User_Home extends AppCompatActivity
             }
         });
 
-
+        //FAV CARD ON CLICK LISTNER
         favcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,15 +117,7 @@ public class User_Home extends AppCompatActivity
             }
         });
 
-
-
-
     }
-
-
-
-
-
 
 
     @Override
@@ -149,19 +139,23 @@ public class User_Home extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.Log_out) {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(User_Home.this, MainActivity.class));
             finish();
-            Toast.makeText(User_Home.this, "Sign Out", Toast.LENGTH_LONG).show();
+            Toast.makeText(User_Home.this, getString(R.string.SIGN_OUT), Toast.LENGTH_LONG).show();
             return true;
         }
+
+        if (id == R.id.edit_profile){
+
+
+            startActivity(new Intent(User_Home.this, Edit_profile.class));
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -174,21 +168,20 @@ public class User_Home extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.nav_search) {
+            startActivity(new Intent(User_Home.this, start_search_ui.class));
+        } else if (id == R.id.nav_bookmarks) {
+            startActivity(new Intent(User_Home.this, bookmarks_act.class));
+        } else if (id == R.id.nav_nearby) {
+            startActivity(new Intent(User_Home.this, nearby_permissions.class));
+        } else if (id == R.id.nav_edit_profile) {
+            startActivity(new Intent(User_Home.this, Edit_profile.class));
         } else if (id == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(User_Home.this, MainActivity.class));
             finish();
-            Toast.makeText(User_Home.this, "Sign Out", Toast.LENGTH_LONG).show();
+            Toast.makeText(User_Home.this,  getString(R.string.SIGN_OUT), Toast.LENGTH_LONG).show();
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

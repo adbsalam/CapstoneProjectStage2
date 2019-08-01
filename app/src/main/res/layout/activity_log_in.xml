@@ -46,19 +46,17 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"
-                android:hint="Email Address"
-
+                android:hint="@string/email_address_lay"
                 android:background="@drawable/shape_textbox"
-                android:paddingLeft="40dp"
-                />
+                android:paddingStart="40dp"
+                tools:ignore="RtlSymmetry" />
 
             <ImageView
                 android:layout_width="27dp"
                 android:layout_height="27dp"
-
                 android:layout_marginTop="30dp"
-
-                android:layout_marginLeft="10dp"
+                    android:contentDescription="@string/icon_lay"
+                android:layout_marginStart="10dp"
 
                 />
         </RelativeLayout>
@@ -71,24 +69,19 @@
                 android:id="@+id/passwordTxtM"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-
                 android:layout_marginTop="20dp"
-                android:hint="Password"
+                android:hint="@string/pass_hint"
                 android:background="@drawable/shape_textbox"
                 android:layout_centerHorizontal="true"
                 android:inputType="textPassword"
-                android:paddingLeft="40dp"
+                android:paddingStart="40dp"
                 />
-
-
-
             <ImageView
                 android:layout_width="27dp"
                 android:layout_height="27dp"
-
+                android:contentDescription= "@string/icon_lay"
                 android:layout_marginTop="30dp"
-
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
 
                 />
 
@@ -100,7 +93,7 @@
             android:layout_marginTop="20dp"
             android:layout_below="@+id/password_la"
             android:background="@drawable/shape_button"
-            android:text="Log-In"
+            android:text="@string/Log_in_lay"
             android:textColor="#ffffff"
             android:layout_centerHorizontal="true"
             />

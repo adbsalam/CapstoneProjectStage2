@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.salam.capstoneprojectstage2.Models.user_details;
 import com.salam.capstoneprojectstage2.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 
 
 
-    public class nearbyAdapter extends RecyclerView.Adapter<nearbyAdapter.RecyclerViewHolder> {
-
+public class nearbyAdapter extends RecyclerView.Adapter<nearbyAdapter.RecyclerViewHolder> {
         private List<user_details> user_list;
         private final Activity activity;
 
@@ -37,6 +37,15 @@ import java.util.List;
         public void onBindViewHolder(final nearbyAdapter.RecyclerViewHolder holder, int position) {
             final user_details user_listnew = user_list.get(position);
             holder.name.setText(user_listnew.getFirst_name());
+            if (user_listnew.getimageURL().equals("default_url")){
+
+                            holder.near_dp.setImageResource(android.R.drawable.ic_menu_compass);
+                        }
+                        else
+                        {
+                            Picasso.get().load(user_listnew.getimageURL()).into(holder.near_dp);
+                        }
+
 
             holder.itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -69,7 +78,7 @@ import java.util.List;
 
             }
         }
-    }
+}
 
 
 

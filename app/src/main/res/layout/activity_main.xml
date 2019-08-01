@@ -29,6 +29,7 @@
    <ImageView
        android:layout_width="100dp"
        android:id="@+id/logo"
+       android:contentDescription="@string/app_logo_hint"
        android:layout_height="100dp"
        android:layout_alignParentTop="true"
        android:layout_marginTop="60dp"
@@ -40,7 +41,7 @@
    <Button
        android:layout_width="319dp"
        android:layout_height="54dp"
-       android:text="Sign In"
+       android:text="@string/sign_layout"
        android:textColor="#ffff"
       android:id="@+id/btn_signin"
        android:layout_centerHorizontal="true"
@@ -54,7 +55,7 @@
    <Button
        android:layout_width="319dp"
        android:layout_height="54dp"
-       android:text="Register"
+       android:text="@string/register_lla"
        android:textColor="#ffff"
          android:id="@+id/btn_register"
        android:layout_centerHorizontal="true"

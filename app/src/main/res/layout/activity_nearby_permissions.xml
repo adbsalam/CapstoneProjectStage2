@@ -43,7 +43,7 @@
 
         android:background="@drawable/shape_button"
         android:layout_below="@+id/permissiondis"
-        android:text="Use Location"
+        android:text="@string/all"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         />

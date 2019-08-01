@@ -11,12 +11,30 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        debug {
+            keyAlias 'key0'
+            keyPassword 'password'
+            storeFile file('keystore/keystore')
+            storePassword 'password'
+        }
+    }
+
+
     buildTypes {
         release {
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            signingConfig signingConfigs.debug
+        }
     }
+
+
+
+
 }
 
 dependencies {
@@ -45,6 +63,7 @@ dependencies {
     implementation 'com.karumi:dexter:5.0.0'
     implementation 'com.google.firebase:firebase-messaging:19.0.1'
     implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 
 }

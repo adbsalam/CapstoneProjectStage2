@@ -1,5 +1,6 @@
 package com.salam.capstoneprojectstage2.Search_query_UI;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,15 +36,12 @@ public class caseLaw_details_fragment extends Fragment {
         private TextView title, docket;
         private TextView citation_txt, juri_txt, court_txt, details_txt;
         private String caseid;
-    private String citation;
-    private String title_of;
+        private String citation;
+        private String title_of;
         private ImageView fav;
 
         private DatabaseReference ratingdatabase;
         private FirebaseAuth auth;
-
-
-
 
     public caseLaw_details_fragment() {
         // Required empty public constructor
@@ -65,15 +63,12 @@ public class caseLaw_details_fragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_case_law_details_fragment, container, false);
         title = view.findViewById(R.id.title_txt);
         docket = view.findViewById(R.id.dock_number);
-citation_txt = view.findViewById(R.id.citation_txt);
-juri_txt = view.findViewById(R.id.juri_txt);
-court_txt = view.findViewById(R.id.court_txt);
-details_txt = view.findViewById(R.id.details_extra_txt);
-
-
+        citation_txt = view.findViewById(R.id.citation_txt);
+        juri_txt = view.findViewById(R.id.juri_txt);
+        court_txt = view.findViewById(R.id.court_txt);
+        details_txt = view.findViewById(R.id.details_extra_txt);
         fav = view.findViewById(R.id.fav_button);
         auth = FirebaseAuth.getInstance();
-
 
         fav.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,28 +77,24 @@ details_txt = view.findViewById(R.id.details_extra_txt);
                 FirebaseUser firebaseUser = auth.getCurrentUser();
                 assert firebaseUser != null;
                 final String userid = firebaseUser.getUid();
-                ratingdatabase = FirebaseDatabase.getInstance().getReference("Fav_cases").child(userid).child(caseid);
+                ratingdatabase = FirebaseDatabase.getInstance().getReference(getString(R.string.FAV_CASE_DB_C)).child(userid).child(caseid);
 
                 HashMap<String, String> hashrate = new HashMap<>();
-                hashrate.put("caseid", caseid);
-                hashrate.put("jurisdiction", juri_txt.getText().toString());
-                hashrate.put("title", title_of);
-                hashrate.put("court", court_txt.getText().toString());
-                hashrate.put("cite", citation_txt.getText().toString());
-                hashrate.put("details_extra", details_txt.getText().toString());
+                hashrate.put(getString(R.string.CASE_ID_CASE), caseid);
+                hashrate.put(getString(R.string.JURI_C), juri_txt.getText().toString());
+                hashrate.put(getString(R.string.TITLE_DB), title_of);
+                hashrate.put(getString(R.string.COURT_D), court_txt.getText().toString());
+                hashrate.put(getString(R.string.CITE_DB), citation_txt.getText().toString());
+                hashrate.put(getString(R.string.EXTRA_DETAILS), details_txt.getText().toString());
                 ratingdatabase.setValue(hashrate);
 
-
+                Toast.makeText(getContext(),getString(R.string.ADDED_MSG), Toast.LENGTH_LONG).show();
 
             }
         });
 
-
-
-
-
          new LongOperation().execute("");
-        return view;
+         return view;
 
     }
 
@@ -112,47 +103,33 @@ details_txt = view.findViewById(R.id.details_extra_txt);
     }
 
     private void ShowItemsNames() {
-/*
+
         Uri.Builder builder = new Uri.Builder();
-        builder.scheme(getString(R.string.auth))
-                .authority(getString(R.string.authority))
-                .appendPath(getString(R.string.topher))
-                .appendPath(getString(R.string.year))
-                .appendPath(getString(R.string.month))
-                .appendPath(getString(R.string.link)).appendPath(getString(R.string.jsonname));
-
-                */
-
-        String URL = "https://api.case.law/v1/cases/"+caseid;
-
-
-
-
+        builder.scheme(getString(R.string.HTTP))
+                .authority(getString(R.string.AUTHORITY))
+                .appendPath("v1")
+                .appendPath(getString(R.string.CASES_D))
+               .appendPath(caseid);
+        String URL2 = builder.build().toString();
 
         RequestQueue Video_Queue = Volley.newRequestQueue(getContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new com.android.volley.Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL2, new com.android.volley.Response.Listener<String>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-
-
-                    JSONArray casebodyOBJ = jsonObject.getJSONArray("citations");
-                    JSONObject volumeOBJ = jsonObject.getJSONObject("volume");
-                    JSONObject courtOBJ = jsonObject.getJSONObject("court");
-                    JSONObject juriOBJ = jsonObject.getJSONObject("jurisdiction");
-                    title.setText(jsonObject.getString("name"));
+                    JSONArray casebodyOBJ = jsonObject.getJSONArray(getString(R.string.CITATION_D));
+                    JSONObject volumeOBJ = jsonObject.getJSONObject(getString(R.string.VOLUME_D));
+                    JSONObject courtOBJ = jsonObject.getJSONObject(getString(R.string.COURT_JS));
+                    JSONObject juriOBJ = jsonObject.getJSONObject(getString(R.string.JURI_JS));
+                    title.setText(jsonObject.getString(getString(R.string.N_ABV_S)));
                     //citation = casebodyOBJ.toString().replaceAll("[*]","");
-
-                    citation = casebodyOBJ.getJSONObject(0).getString("type")+"  " +casebodyOBJ.getJSONObject(0).getString("cite");
-
-
+                    citation = casebodyOBJ.getJSONObject(0).getString(getString(R.string.TYPE_JS))+"  " +casebodyOBJ.getJSONObject(0).getString(getString(R.string.CITE_JS_P));
                     citation_txt.setText(citation);
-                    details_txt.setText(jsonObject.getString("name_abbreviation") + "\nDecision Date:" + jsonObject.getString("decision_date"));
-                    court_txt.setText(courtOBJ.getString("name") +"(abr)" +courtOBJ.getString("name_abbreviation"));
-                    juri_txt.setText(juriOBJ.getString("name") +" " + juriOBJ.getString("name_long") );
-
-
+                    details_txt.setText(jsonObject.getString(getString(R.string.N_ABV_S)) + "\nDecision Date:" + jsonObject.getString(getString(R.string.D_DATE_J_R)));
+                    court_txt.setText(courtOBJ.getString(getString(R.string.NAME_TT)) +"(abr)" +courtOBJ.getString(getString(R.string.N_ABV_S)));
+                    juri_txt.setText(juriOBJ.getString(getString(R.string.NAME_TT)) +" " + juriOBJ.getString(getString(R.string.NAME_LONG_D)) );
                 }
                 catch (JSONException e){
                     e.printStackTrace();

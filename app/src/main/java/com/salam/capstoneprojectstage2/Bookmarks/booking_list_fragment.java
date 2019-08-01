@@ -1,5 +1,6 @@
 package com.salam.capstoneprojectstage2.Bookmarks;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,16 +31,12 @@ public class booking_list_fragment extends Fragment {
     private RecyclerView recyclerView;
     private List<search_results_model> case_list = new ArrayList<>();
     private fav_adapter mAdapter;
-
     FirebaseAuth auth;
-
     FirebaseUser Fuser;
     DatabaseReference reference;
     public booking_list_fragment() {
         // Required empty public constructor
     }
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,40 +50,29 @@ public class booking_list_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_booking_list_fragment, container, false);
-
-auth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
         recyclerView = view.findViewById(R.id.fav_recycler);
         mAdapter = new fav_adapter(getActivity(), case_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-readCases();
-
+        new NewLong().execute("");
         return view;
 
     }
-
-
     private void readCases(){
 
-case_list.clear();
-        reference = FirebaseDatabase.getInstance().getReference("Fav_cases").child(auth.getCurrentUser().getUid());
+        case_list.clear();
+        reference = FirebaseDatabase.getInstance().getReference(getString(R.string.FAV_CASE)).child(auth.getCurrentUser().getUid());
 
-        reference.orderByChild("caseid").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.orderByChild(getString(R.string.CASE_ID)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-
                     search_results_model casemode = snapshot.getValue(search_results_model.class);
                     case_list.add(casemode);
-
-
                 }
-
                 recyclerView.setAdapter(mAdapter);
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -94,8 +80,24 @@ case_list.clear();
         });
     }
 
+    private class NewLong extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            readCases();
+            return "done";
+        }
 
+        @Override
+        protected void onPostExecute(String result) {
+        }
 
+        @Override
+        protected void onPreExecute() {
 
+        }
 
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
 }
