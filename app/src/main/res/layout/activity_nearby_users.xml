@@ -19,4 +19,14 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/nearby_error"
+        android:layout_centerInParent="true"
+        android:text="@string/NO_NEARBY_ERROR"/>
+
+
 </RelativeLayout>

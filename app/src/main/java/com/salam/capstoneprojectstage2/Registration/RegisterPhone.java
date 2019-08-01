@@ -25,22 +25,26 @@ import java.util.HashMap;
 
 public class RegisterPhone extends AppCompatActivity {
     Button next;
-
+    String about;
     EditText first_name, last_name,  companyName, email, password;
     String Lati, Longi, adrr, first_txt, last_txt, companyname_txt, email_txt, password_txt;
-    String aboutu = getString(R.string.FEW_THINGS);
+
+
     //firebase Initiate
     FirebaseAuth auth;
     DatabaseReference dbref;
     DatabaseReference refprofile;
     DatabaseReference ratingdatabase;
-    String imageURL = getString(R.string.DEFAULT_URL_R);
+    String imageURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_phone);
 
+
+        imageURL = getString(R.string.DEFAULT_URL_R);
+        about  = "few Lines";
         Intent loc = getIntent();
         Lati = loc.getStringExtra(getString(R.string.LATI_R));
         Longi = loc.getStringExtra(getString(R.string.LONGI_R));
@@ -111,7 +115,7 @@ public class RegisterPhone extends AppCompatActivity {
                             hashMap.put(getString(R.string.COMPANY_N_R), companyname_txt);
                             hashMap.put(getString(R.string.EMAIL_R), email_txt);
                             hashMap.put(getString(R.string.ADRRESS_R), adrr);
-                            hashMap.put(getString(R.string.ABOUT_LBL), aboutu);
+                            hashMap.put(getString(R.string.ABOUT_LBL), about);
                             hashMap.put(getString(R.string.IMAGE_URL_R), imageURL);
                             dbref.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

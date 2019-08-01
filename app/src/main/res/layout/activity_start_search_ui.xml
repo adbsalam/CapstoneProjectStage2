@@ -55,29 +55,43 @@
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
-
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/select_a_minimum_date"
+    android:id="@+id/min_lbl"
+    android:textStyle="bold"
+    android:layout_below="@id/search_card_key"
+    android:layout_marginTop="5dp"/>
             <DatePicker
                 android:id="@+id/mindatepick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:datePickerMode="spinner"
                 android:calendarViewShown="false"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
 
                 android:layout_below="@id/search_card_key"
                 android:layout_centerHorizontal="true"
                 />
 
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_a_maximum_date"
+                android:id="@+id/max_lbl"
+                android:textStyle="bold"
+                android:layout_below="@id/mindatepick"
+                android:layout_marginTop="5dp"/>
             <DatePicker
                 android:id="@+id/maxdatepick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:datePickerMode="spinner"
                 android:calendarViewShown="false"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
 
-                android:layout_below="@id/mindatepick"
+                android:layout_below="@id/max_lbl"
                 android:layout_centerHorizontal="true"
                 />
 

@@ -170,4 +170,26 @@
     <string name="no_results_try_again">No results for this query. Make sure you have correct MINIMUM and MAXIMUM dates selected. Try to increase the date gap and check Keyword Spellings and try again.</string>
     <string name="display_picture_lal">display_picture</string>
     <string name="testtt">test</string>
+    <string name="search_img_im">earch image</string>
+    <string name="search_new_case_law">Search New Case Law</string>
+    <string name="earch_image_im">earch image</string>
+    <string name="open_saved_bookmarks">Open Saved Bookmarks</string>
+    <string name="nearby_images_new">Nearby Images</string>
+    <string name="search_nearby_professionals">Search Nearby Professionals</string>
+    <string name="cit_new">citations</string>
+    <string name="VOLUME_WID">volume</string>
+    <string name="COURT_WID">court</string>
+    <string name="JURI_WID">jurisdiction</string>
+    <string name="TYPE_WID">type</string>
+    <string name="NAM_ABRI_WID">name_abbreviation</string>
+    <string name="D_DATE_WID">decision_date</string>
+    <string name="NAME_WID">name</string>
+    <string name="ABR_WID">(abr)</string>
+    <string name="NAME_LONG_WID">name_long</string>
+    <string name="NAAME_ABR_WID">name_abbreviation</string>
+    <string name="NO_NEARBY_ERROR">No nearby Users found. Please try again</string>
+    <string name="select_a_minimum_date">Select a minimum date</string>
+    <string name="select_a_maximum_date">Select a maximum date</string>
+    <string name="no_bookmarks_found_please_add_bookmarks_to_see_this_page">No Bookmarks Found, Please add bookmarks to see this page</string>
+    <string name="EDIT_TITLE">Edit Profile</string>
 </resources>

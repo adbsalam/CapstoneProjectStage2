@@ -196,6 +196,11 @@ public class RegistrationMaps extends AppCompatActivity implements OnMapReadyCal
 
     }
     public void findaddress(View view) {
+        if (cusadr.getText().toString().isEmpty()){
+            cusadr.setError(getString(R.string.LAST_N_ERR));
+            cusadr.requestFocus();
+            return;
+        }
 
         String adrtxt = cusadr.getText().toString();
         Intent startregisterloc = new Intent(RegistrationMaps.this, RegisterPhone.class);
@@ -203,6 +208,8 @@ public class RegistrationMaps extends AppCompatActivity implements OnMapReadyCal
         startregisterloc.putExtra(getString(R.string.LONGI_M), longiput);
         startregisterloc.putExtra(getString(R.string.ADR_MM), adrtxt);
         startActivity(startregisterloc);
+
+
 
 
     }

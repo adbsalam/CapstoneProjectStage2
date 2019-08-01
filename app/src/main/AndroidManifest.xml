@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".User_UI.Edit_profile"></activity>
+        <activity android:name=".User_UI.Edit_profile"
+            android:parentActivityName=".User_UI.User_Home"></activity>
 
         <receiver android:name=".widget.app_details_widget">
             <intent-filter>
@@ -35,10 +36,12 @@
                 android:resource="@xml/app_details_widget_info" />
         </receiver>
 
-        <activity android:name=".Bookmarks.bookmarks_act" />
+        <activity android:name=".Bookmarks.bookmarks_act"
+            android:parentActivityName=".User_UI.User_Home"/>
         <activity android:name=".peopleNearby.nearby_maps" />
         <activity android:name=".peopleNearby.nearby_permissions" />
-        <activity android:name=".peopleNearby.nearbyUsers" />
+        <activity android:name=".peopleNearby.nearbyUsers"
+            android:parentActivityName=".User_UI.User_Home"/>
         <activity
             android:name=".Search_query_UI.search_results"
             android:configChanges="orientation"

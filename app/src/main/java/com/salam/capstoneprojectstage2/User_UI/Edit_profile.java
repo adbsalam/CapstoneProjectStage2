@@ -65,6 +65,7 @@ public class Edit_profile extends AppCompatActivity {
         fullname_txt = findViewById(R.id.full_name_txt);
         company_txt = findViewById(R.id.comapny_txt);
         edit_dp = findViewById(R.id.edit_dp);
+        getSupportActionBar().setTitle(getString(R.string.EDIT_TITLE));
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         storagereference = FirebaseStorage.getInstance().getReference(getString(R.string.UPLOAD_DB));
@@ -82,7 +83,7 @@ public class Edit_profile extends AppCompatActivity {
                 }
                 else
                 {
-                    Picasso.get().load(user.getimageURL()).into(edit_profile_dp);
+                    Picasso.get().load(user.getimageURL()).into(edit_dp);
                 }
             }
             @Override

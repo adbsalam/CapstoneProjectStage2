@@ -21,8 +21,6 @@
                     android:background="@drawable/lawback"
                     android:alpha="0.4">
 
-
-
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

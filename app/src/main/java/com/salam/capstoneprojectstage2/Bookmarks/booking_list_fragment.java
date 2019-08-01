@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +32,7 @@ public class booking_list_fragment extends Fragment {
     private List<search_results_model> case_list = new ArrayList<>();
     private fav_adapter mAdapter;
     FirebaseAuth auth;
-    FirebaseUser Fuser;
+    TextView booking_error;
     DatabaseReference reference;
     public booking_list_fragment() {
         // Required empty public constructor
@@ -55,6 +55,7 @@ public class booking_list_fragment extends Fragment {
         mAdapter = new fav_adapter(getActivity(), case_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        booking_error = view.findViewById(R.id.book_err_txt);
         new NewLong().execute("");
         return view;
 
@@ -70,6 +71,7 @@ public class booking_list_fragment extends Fragment {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     search_results_model casemode = snapshot.getValue(search_results_model.class);
                     case_list.add(casemode);
+                    booking_error.setVisibility(View.INVISIBLE);
                 }
                 recyclerView.setAdapter(mAdapter);
             }

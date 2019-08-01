@@ -215,7 +215,11 @@ public class nearby_maps extends AppCompatActivity implements OnMapReadyCallback
         startregisterloc.putExtra("adr", adrtxt);
         startActivity(startregisterloc);
         finish();
-
+        if (cusadr.getText().toString().isEmpty()){
+            cusadr.setError(getString(R.string.LAST_N_ERR));
+            cusadr.requestFocus();
+            return;
+        }
 
     }
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,15 +31,9 @@ import java.util.List;
 public class nearbyUsers extends AppCompatActivity {
     private RecyclerView recyclerView;
     String userid = "";
-    String log = "asdasd";
-    String newone = "";
-    String Latitudecustomer;
-    String distanceint;
-    Integer i = 1;
-    TextView usertxtlist;
-    String Longitudecustomer;
+   TextView nearby_error;
     Location newlocation = new Location("");
-    Double distance2 = 6714242.0;
+    Double distance2 = 10000000.0;
     List<user_details> users = new ArrayList<>();
     List<Location_model> locations = new ArrayList<>();
         String getLati, getLongi;
@@ -47,7 +42,8 @@ public class nearbyUsers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby_users);
-getSupportActionBar().setTitle(getString(R.string.PROFESSIONALS));
+        nearby_error = findViewById(R.id.nearby_error);
+        getSupportActionBar().setTitle(getString(R.string.PROFESSIONALS));
       Intent i = getIntent();
       getLati = i.getStringExtra(getString(R.string.LATI));
       getLongi = i.getStringExtra(getString(R.string.LONGI));
@@ -85,11 +81,18 @@ getSupportActionBar().setTitle(getString(R.string.PROFESSIONALS));
                                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
                                     user_details user = snapshot.getValue(user_details.class);
                                     if (!user.getId().equals(firebaseUser.getUid())){
+
+
+
                                         if (user.getId().equals(locs.getId())) {
 
                                             users.add(user);
-
+                                            nearby_error.setVisibility(View.INVISIBLE);
                                         }
+
+
+
+
                                     }
 
                                 }

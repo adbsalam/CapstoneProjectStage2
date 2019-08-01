@@ -53,9 +53,9 @@ public class app_details_widget extends AppWidgetProvider {
         super.onReceive(context, intent);
         String action = intent.getAction();
         Bundle extras = intent.getExtras();
+        assert extras != null;
         idofitem = extras.getString("id");
         if (action != null && action.equals(UPDATE_ACTION)) {
-            // updateAppWidget(context, appWidgetManager, id , titleofrecipie);
             ShowItemsNames(context, idofitem);
         } else { super.onReceive(context, intent); }
     }
@@ -78,27 +78,25 @@ public class app_details_widget extends AppWidgetProvider {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    JSONArray casebodyOBJ = jsonObject.getJSONArray("citations");
-                    JSONObject volumeOBJ = jsonObject.getJSONObject("volume");
-                    JSONObject courtOBJ = jsonObject.getJSONObject("court");
-                    JSONObject juriOBJ = jsonObject.getJSONObject("jurisdiction");
+                    JSONArray casebodyOBJ = jsonObject.getJSONArray(context.getString(R.string.cit_new));
+                    JSONObject courtOBJ = jsonObject.getJSONObject(context.getString(R.string.COURT_WID));
+                    JSONObject juriOBJ = jsonObject.getJSONObject(context.getString(R.string.JURI_WID));
                     //STRING TO SET TEXTVIEW OF WIDGET THAT GETS DETAULS OF THE CASE
-                    CASE_DETAILS = casebodyOBJ.getJSONObject(0).getString("type") + "  " + casebodyOBJ.getJSONObject(0).getString("cite") + "\n"+
-                            jsonObject.getString("name_abbreviation") + "\nDecision Date:" + jsonObject.getString("decision_date")+"\n" +
-                            courtOBJ.getString("name") + "(abr)" + courtOBJ.getString("name_abbreviation")+"\n" +
-                            juriOBJ.getString("name") + " " + juriOBJ.getString("name_long");
+                    CASE_DETAILS = casebodyOBJ.getJSONObject(0).getString(context.getString(R.string.TYPE_WID)) + "  " + casebodyOBJ.getJSONObject(0).getString(context.getString(R.string.cit_new)) + "\n"+
+                            jsonObject.getString(context.getString(R.string.NAM_ABRI_WID)) + "\nDecision Date:" + jsonObject.getString(context.getString(R.string.D_DATE_WID))+"\n" +
+                            courtOBJ.getString(context.getString(R.string.NAME_WID)) + context.getString(R.string.ABR_WID) + courtOBJ.getString(context.getString(R.string.NAM_ABRI_WID))+"\n" +
+                            juriOBJ.getString(context.getString(R.string.NAME_WID)) + " " + juriOBJ.getString(context.getString(R.string.NAME_LONG_WID));
                     final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
                     ComponentName name = new ComponentName(context, app_details_widget.class);
                     int[] appWidgetId = AppWidgetManager.getInstance(context).getAppWidgetIds(name);
                     final int N = appWidgetId.length;
                     if (N < 1)
                     {
-                        return ;
                     }
                     else {
                         int id = appWidgetId[N-1];
 
-                        updateAppWidget(context, appWidgetManager, id , CASE_DETAILS, jsonObject.getString("name_abbreviation"));
+                        updateAppWidget(context, appWidgetManager, id , CASE_DETAILS, jsonObject.getString(context.getString(R.string.NAAME_ABR_WID)));
                     }
 
 

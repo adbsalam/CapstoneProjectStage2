@@ -18,6 +18,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/near_dp"
+        android:scaleType="centerCrop"
         android:contentDescription="@string/display_picture_lal"
         />
 

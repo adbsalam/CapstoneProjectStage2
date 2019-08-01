@@ -16,4 +16,13 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/book_err_txt"
+        android:layout_centerInParent="true"
+        android:text="@string/no_bookmarks_found_please_add_bookmarks_to_see_this_page"/>
+
 </RelativeLayout>

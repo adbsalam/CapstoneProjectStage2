@@ -19,8 +19,6 @@ android {
             storePassword 'password'
         }
     }
-
-
     buildTypes {
         release {
             signingConfig signingConfigs.debug

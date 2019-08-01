@@ -69,10 +69,12 @@ public class caseLaw_details_fragment extends Fragment {
         details_txt = view.findViewById(R.id.details_extra_txt);
         fav = view.findViewById(R.id.fav_button);
         auth = FirebaseAuth.getInstance();
+        fav.setVisibility(View.VISIBLE);
 
         fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fav.setVisibility(View.INVISIBLE);
                 title_of = title.getText().toString();
                 FirebaseUser firebaseUser = auth.getCurrentUser();
                 assert firebaseUser != null;
